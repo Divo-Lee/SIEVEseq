@@ -4,7 +4,7 @@
 #Author: Hongxiang Li and by Tsung Fei Khang
 #Email: chelsea.divo@hotmail.com (H. Li)
 #Latest update: 23 March 2024
-#Part 6: R Codes for DE, DV, and DS tests on Mayo RNA-Seq
+#Part 7: R Codes for DE, DV, and DS tests on Mayo RNA-Seq
 #dataset Goodness-of-fit Assessment of the skew-normal model  
 #on the distribution of the CLR-transformed Mayo RNA-Seq
 #data (control vs. AD) 
@@ -188,3 +188,4 @@ dim(ks_pvalue_mat[(ks_pvalue_mat$control < 0.05 | ks_pvalue_mat$AD < 0.05), ])
 
 
 ###END###
+
