@@ -4,7 +4,7 @@
 #Authors: Hongxiang Li and Dr. Tsung Fei Khang
 #Email: chelsea.divo@hotmail.com (H. Li)
 #Date: 08 April 2024
-#Part 6: R Codes for DE, DV, and DS tests on Mayo 
+#Part 8: R Codes for DE, DV, and DS tests on Mayo 
 #RNA-Seq dataset control vs. AD comparison
 #######################################################
 
@@ -858,3 +858,4 @@ for (i in 1:length(simultaneous_genes)) {
   )
 }
 ###END##
+
