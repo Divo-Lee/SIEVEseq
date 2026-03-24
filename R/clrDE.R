@@ -27,7 +27,8 @@
 #'
 #'
 #' @import sn
-#'
+#' @importFrom stats p.adjust
+#' @importFrom stats pnorm
 #' @examples
 #'  library(SIEVE)
 #'  data(clrCounts3) # The first 50 genes (gene1 to gene50) are DE genes
