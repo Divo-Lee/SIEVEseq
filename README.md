@@ -18,6 +18,7 @@ Install SIEVE from GitHub with
   install.packages("devtools")}`
   
  `devtools::install_github("Divo-Lee/SIEVE")`
+
  or
 
  `if (!"pak" %in% installed.packages()) {
