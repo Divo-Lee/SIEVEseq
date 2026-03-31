@@ -18,7 +18,12 @@ Install SIEVE from GitHub with
   install.packages("devtools")}`
   
  `devtools::install_github("Divo-Lee/SIEVE")`
- 
+ or
+
+ `if (!"pak" %in% installed.packages()) {
+  install.packages("pak")}`
+  
+ `pak::pkg_install("Divo-Lee/SIEVE")`
  
 ### Dependencies:
  `SIEVE` `R` package depends on the following packages: `sn`, `stats`, `utils`, `ggplot2`.
