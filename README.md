@@ -9,11 +9,14 @@ SIEVE: A statistical method for building a unified framework for the simultaneou
 
 ### Installation:
 Install SIEVE from local source with
+
 `install.packages("SIEVE_1.0.0.tar.gz", repos=NULL, type="source")`
 
 Install SIEVE from GitHub with
+
  `if (!"devtools" %in% installed.packages()) {
   install.packages("devtools")}`
+  
  `devtools::install_github("Divo-Lee/SIEVE")`
  
  
