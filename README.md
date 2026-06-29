@@ -8,6 +8,10 @@ SIEVEseq: A statistical method for building a unified framework for the simultan
 
 
 ### Installation:
+Install SAVER from CRAN by running:
+`install.packages("SIEVEseq")`
+`library("SIEVEseq")`
+
 Install SIEVEseq from local source with
 
 `install.packages("SIEVEseq_0.0.0.tar.gz", repos=NULL, type="source")`
