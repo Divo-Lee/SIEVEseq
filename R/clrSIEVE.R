@@ -1,5 +1,4 @@
-#' Sieve Differential Expression, Variability and Skewness Genes
-#' for RNA-Seq Data Based on Skew-normal Distribution
+#' Simultaneous Differential Expression, Variability and Skewness Analysis Using RNA-Seq Data
 #'
 #' @description Model CLR-transformed RNA-Seq data using the skew-normal
 #'              distribution, and then conduct statistical tests for finding
@@ -7,18 +6,18 @@
 #'              and skewness using the Wald test.
 #'
 #' @param clrSeq_result The result of clrSeq() function.
-#' @param alpha_level The adjusted p-value significance cutoff used for flagging
-#'                    the differential expression, variability and skewness genes.
-#' @param order_DE Logical string, "FALSE" for no ordering, "TRUE" for ordering by the value of \code{DE}.
-#' @param order_LFC Logical string, "FALSE" for no ordering, "TRUE" for ordering by the value of \code{LFC}.
-#' @param order_DS Logical string, "FALSE" for no ordering, "TRUE" for ordering by the value of \code{DS}.
-#' @param order_sieve Character/logical string specifying the order method. Possibilities are "DE"
-#'                    the value of \code{DE}, "LFC" for log2-fold-change of variability,
-#'                    "DV" for the value of \code{DV} or "FALSE" for no ordering.
+#' @param alpha_level The adjusted p-value cutoff used for flagging genes that show significant
+#'                    differential expression, variability and skewness.
+#' @param order_DE Logical string. "FALSE" for no ordering; "TRUE" for ordering by the value of \code{DE}.
+#' @param order_LFC Logical string. "FALSE" for no ordering; "TRUE" for ordering by the value of \code{LFC}.
+#' @param order_DS Logical string. "FALSE" for no ordering; "TRUE" for ordering by the value of \code{DS}.
+#' @param order_sieve Character/logical string specifying the order method. Possibilities are "DE" for
+#'                    the value of \code{DE}, "LFC" for log2 fold change of variability,
+#'                    "DS" for the value of \code{DS} or "FALSE" for no ordering.
 #'
-#' @return Lists of \code{clrDE_test}, \code{clrDV_test}, \code{clrDS_test} and
-#'         \code{clrSIEVE_tests} classes that contain the results of the DE, DV,
-#'         DS tests and one-stop those three tests, and associated information:
+#' @return \code{clrDE_test}, \code{clrDV_test} and \code{clrDS_test} contain the
+#'         result of the DE, DV and DS tests, respectively.
+#'         \code{clrSIEVE_tests} contains the result of all three tests.
 #'  \item{clrDE_test}{A data.frame contating the results of differential expression test.}
 #'  \item{clrDV_test}{A data.frame contating the results of differential variability test.}
 #'  \item{clrDS_test}{A data.frame contating the results of differential skewness test.}
@@ -27,20 +26,20 @@
 #'  \item{se_DE}{The standard error of \code{DE}.}
 #'  \item{z_DE}{The observed Wald statistic of \code{DE}.}
 #'  \item{pval_DE}{The unadjusted p-value of Wald test of \code{DE}.}
-#'  \item{adj_pval_DE}{The p-value of the Wald test of  adjusted using the Benjamini-Yekutieli procedure.}
+#'  \item{adj_pval_DE}{The p-value of the Wald test of \code{DE}, adjusted using the Benjamini-Yekutieli procedure.}
 #'  \item{mu1}{The maximum likelihood estimate of the mean parameter for group 1.}
 #'  \item{mu2}{The maximum likelihood estimate of the mean parameter for group 2.}
-#'  \item{de_indicator}{1: DE gene, 0: non-DE gene.}
-#'  \item{SD_ratio}{The ratio of standard deviation (\code{sigma}) between group 2 and group 1 (\code{sigma2}\code{/}\code{sigma1}.). }
+#'  \item{de_indicator}{1: DE gene; 0: non-DE gene.}
+#'  \item{SD_ratio}{The ratio of standard deviation (\code{sigma}) between group 2 and group 1 (\code{sigma2}\code{/}\code{sigma1}). }
 #'  \item{LFC}{\code{log2} fold change: \code{log2}(\code{sigma2}\code{/}\code{sigma1}).}
-#'  \item{DV}{The difference of standard deviation (\code{sigma}) between group 2 and group 1 (\code{sigma2} \code{-} \code{sigma1}.).}
+#'  \item{DV}{The difference of standard deviation (\code{sigma}) between group 2 and group 1 (\code{sigma2} \code{-} \code{sigma1}).}
 #'  \item{se_DV}{The standard error of \code{DV}.}
 #'  \item{z_DV}{The observed Wald statistic of \code{DV}.}
 #'  \item{pval_DV}{The unadjusted p-value of Wald test of \code{DV}.}
-#'  \item{adj_pval_DV}{he p-value of the Wald test of \code{DV} adjusted using the Benjamini-Yekutieli procedure.}
+#'  \item{adj_pval_DV}{The p-value of the Wald test of \code{DV}, adjusted using the Benjamini-Yekutieli procedure.}
 #'  \item{sigma1}{The maximum likelihood estimate of the standard deviation parameter for group 1.}
 #'  \item{sigma2}{The maximum likelihood estimate of the standard deviation parameter for group 2.}
-#'  \item{dv_indicator}{1: DV gene, 0: non-DV gene.}
+#'  \item{dv_indicator}{1: DV gene; 0: non-DV gene.}
 #'  \item{DS}{The difference of skewness parameter (\code{gamma}) between group 2 and group 1 (\code{gamma2} \code{-} \code{gamma1}.).}
 #'  \item{se_DS}{The standard error of \code{DS}.}
 #'  \item{z_DS}{The observed Wald statistic of \code{DS}.}
@@ -48,14 +47,42 @@
 #'  \item{adj_pval_DS}{The p-value of the Wald test of \code{DS} adjusted using the Benjamini-Yekutieli procedure.}
 #'  \item{gamma1}{The maxiimum likelihood estimate of the skewness parameter for group 1.}
 #'  \item{gamma2}{The maxiimum likelihood estimate of the skewness parameter for group 2.}
-#'  \item{ds_indicator}{1: DS gene, 0: non-DS gene.}
+#'  \item{ds_indicator}{1: DS gene; 0: non-DS gene.}
+#'
+#'
+#'
+#'
+#' @references {
+#'  Azzalini, A. (1985). \emph{A class of distributions which
+#'  includes the normal ones}. \emph{Scandinavian Journal of Statistics} \bold{12}(2),
+#'  171--178, JSTOR
+#'
+#'  Azzalini, A. and Capitanio, A. (2014).
+#'  \emph{The Skew-Normal and Related Families}.
+#'  Cambridge University Press, IMS Monographs series.
+#'
+#'  Azzalini, A. and Arellano-Valle, R. B. (2013).
+#'  Maximum penalized likelihood estimation for skew-normal and skew-\emph{t}
+#'  distributions. \emph{Journal of Statistical Planning and Inference} \bold{143}, 419--433.
+#'
+#'  Azzalini, A. (2022). \emph{The R package \bold{sn}: The skew-normal
+#'  and related distribution such as the skew-t and the SUN (version 2.0.2)}.
+#'  Universit\`a degli Studi di Padova, Italia.
+#'  Home page: \url{https://cran.r-project.org/package=sn}.
+#'
+#'  Aitchison, J. (1986). \emph{The Statistical Analysis of Compositional Data}.
+#'  Chapman & Hall, London.
+#'  }
+#'
+#'
+#' @seealso [clrSeq()] for the results of parameters estimation; alternatively, [clrDE()] only provides DE test and [clrDV()] only provides DV test.
 #'
 #'
 #' @examples
-#' library(SIEVE)
+#' library(SIEVEseq)
 #' data(clrCounts3) # first 50 genes (gene1 to gene50) are DE genes
 #' groups <- c(rep(0, 200), rep(1, 200))
-#' clrSeq_result3 <- clrSeq(clrCounts3, group = groups) # DE dataset
+#' clrSeq_result3 <- clrSeq(clrCounts3[46:100, ], group = groups) # DE dataset
 #' clrSIEVE_result3 <- clrSIEVE(clrSeq_result = clrSeq_result3,
 #'                              alpha_level = 0.05,
 #'                              order_DE = FALSE,
@@ -82,9 +109,11 @@ clrSIEVE <- function(clrSeq_result = NULL,
   # DE, DV and DS tests for two groups only
   # order_sieve = "DE", "LFC", "DS" or FALSE
 
-  if(alpha_level >=1 | alpha_level <= 0){
-    print("Wrong input alpha_level!
-           Default alpha_level (0.05) will be used.")
+  if(alpha_level >= 1 || alpha_level <= 0){
+    warning(
+      "Invalid alpha_level. Default alpha_level (0.05) will be used.",
+      call. = FALSE
+    )
     alpha_level <- 0.05
   }
 

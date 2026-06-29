@@ -5,11 +5,14 @@
 #' @description Produce a histogram of observed CLR-transformed counts, with the
 #'          fitted skew-normal probability density function for a particular gene/transcript.
 #'
+#' @return No return value. This function is called for its side effect of
+#' generating a plot showing the observed CLR-transformed counts and the fitted
+#' skew-normal density.
 #'
 #' @import sn
 #'
 #' @examples
-#'    library(SIEVE)
+#'    library(SIEVEseq)
 #'    data("clrCounts1")
 #'    SN.plot(clrCounts1[1,])
 #'    SN.plot(clrCounts1[2,])

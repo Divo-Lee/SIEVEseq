@@ -29,14 +29,15 @@
 #'
 #' @importFrom  stats p.adjust
 #' @importFrom  stats pnorm
-#' @importFrom  sn selm
+#' @import sn
 #'
+#' @seealso [clrSIEVE()] for DE, DV and DS tests.
 #'
 #' @examples
-#'    library(SIEVE)
+#'    library(SIEVEseq)
 #'    data(clrCounts2) # first 50 genes (gene1 to gene50) are DV genes
 #'    groups <- c(rep(0, 200), rep(1, 200))
-#'    clrDV_test <- clrDV(clrCounts2, group = groups)
+#'    clrDV_test <- clrDV(clrCounts2[46:100, ], group = groups)
 #'    sum(is.na(clrDV_test))  # check NA values
 #'    head(clrDV_test, 5)  # adj_pval < 0.05, DV genes
 #'    tail(clrDV_test, 5)  # adj_pval > 0.05, non-DV genes

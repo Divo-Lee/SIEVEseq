@@ -1,26 +1,26 @@
-#' Differential Expression (DE) test in RNA-Seq data based on skew-normal distribution
+#' Differential Expression (DE) Test of CLR-transformed RNA-Seq Data
 #'
 #' @description Model CLR-transformed RNA-Seq data using the skew-normal distribution,
 #'              and then conduct a statistical test for finding genes/transcripts with
 #'              differential expression using the Wald test.
 #'
-#' @param data CLR-transformed counts matrix for genes in rows and
-#'             samples in columns
+#' @param data CLR-transformed counts matrix with genes/transcripts on the rows
+#'             and samples on the columns
 #' @param group 2 groups (control vs. treatment)
 #'
 #' @return An object of `\code{clrDE}' class that contains the results of the DV test and
 #'         associated information:
 #'  \item{DE}{The difference of \code{mu} between
-#'         gourp 2 and group 1 (\code{mu2} \code{-} \code{mu1}.}
+#'            group 2 and group 1 (\code{mu2} \code{-} \code{mu1}).}
 #'  \item{se}{The standard error of \code{DE}.}
 #'  \item{z}{The observed Wald statistic.}
 #'  \item{pval}{The unadjusted p-value of the Wald test.}
 #'  \item{adj_pval}{The p-value of the Wald test adjusted using the Benjamini-Yekutieli procedure.}
-#'  \item{mu1}{The maximum likelihood estimate of the standard deviation parameter for group 1.}
+#'  \item{mu1}{The maximum likelihood estimate of the mean parameter of group 1.}
 #'  \item{se.mu1}{The standard error of the maximum likelihood estimate of \code{mu1}.}
 #'  \item{z.mu1}{The Wald statistic for \code{mu1}.}
 #'  \item{p.mu1}{The p-value of the Wald test for \code{mu1}.}
-#'  \item{mu2}{The maximum likelihood estimate of the standard deviation parameter for group 2.}
+#'  \item{mu2}{The maximum likelihood estimate of the mean parameter of group 2.}
 #'  \item{se.mu2}{The standard error of the maximum likelihood estimate of \code{mu2}.}
 #'  \item{z.mu2}{The Wald statistic for \code{mu2}.}
 #'  \item{p.mu2}{The p-value of the Wald test for \code{mu2}.}
@@ -29,11 +29,15 @@
 #' @import sn
 #' @importFrom stats p.adjust
 #' @importFrom stats pnorm
+#'
+#' @seealso [clrSIEVE()] for DE, DV and DS tests.
+#'
+#'
 #' @examples
-#'  library(SIEVE)
+#'  library(SIEVEseq)
 #'  data(clrCounts3) # The first 50 genes (gene1 to gene50) are DE genes
 #'  groups <- c(rep(0, 200), rep(1, 200))
-#'  clrDE_test <- clrDE(clrCounts3, group = groups)
+#'  clrDE_test <- clrDE(clrCounts3[46:100, ], group = groups)
 #'  sum(is.na(clrDE_test))  # check NA values
 #'  head(clrDE_test, 5) # adj_pval < 0.05, DE genes
 #'  tail(clrDE_test, 5) # adj_pval > 0.05, non-DE genes
