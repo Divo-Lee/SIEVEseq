@@ -1,6 +1,6 @@
 # SIEVEseq
 
-### SIEVEseq: One-stop differential expression, variability, and skewness analyses using RNA-Seq data
+### SIEVEseq: Unified differential expression, variability, and skewness analyses using RNA-Seq data
 
 Hongxiang Li and Tsung Fei Khang
 
