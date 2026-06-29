@@ -7,7 +7,7 @@
 clr.SN.fit(data)
 }
 \arguments{
-\item{data}{A table of CLR-transformed count data, where genes/transcripts on the rows and
+\item{data}{A table of CLR-transformed count data, with genes/transcripts on the rows and
 samples on columns.}
 }
 \value{
@@ -30,10 +30,31 @@ the skew-normal distribution using centered log-ratio (CLR)
 transformed RNA-Seq data.
 }
 \examples{
- library(SIEVE)
+ library(SIEVEseq)
  data(clrCounts1)
  clr.SN.fit(clrCounts1[1:2, ])
  clr.SN.fit(clrCounts1[1, ])
 
 
+}
+\references{
+Azzalini, A. (1985). \emph{A class of distributions which
+includes the normal ones}. \emph{Scandinavian Journal of Statistics} \bold{12}(2),
+171--178, JSTOR
+
+Azzalini, A. and Capitanio, A. (2014).
+\emph{The Skew-Normal and Related Families}.
+Cambridge University Press, IMS Monographs series.
+
+Azzalini, A. and Arellano-Valle, R. B. (2013).
+Maximum penalized likelihood estimation for skew-normal and skew-\emph{t}
+distributions. \emph{Journal of Statistical Planning and Inference} \bold{143}, 419--433.
+
+Azzalini, A. (2022). \emph{The R package \bold{sn}: The skew-normal
+and related distribution such as the skew-t and the SUN (version 2.0.2)}.
+Universit\`a degli Studi di Padova, Italia.
+Home page: \url{https://cran.r-project.org/package=sn}.
+
+Aitchison, J. (1986). \emph{The Statistical Analysis of Compositional Data}.
+Chapman & Hall, London.
 }

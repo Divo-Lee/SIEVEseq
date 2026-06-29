@@ -9,12 +9,17 @@ SN.plot(data)
 \arguments{
 \item{data}{CLR-transformed counts for a particular gene/transcript.}
 }
+\value{
+No return value. This function is called for its side effect of
+generating a plot showing the observed CLR-transformed counts and the fitted
+skew-normal density.
+}
 \description{
 Produce a histogram of observed CLR-transformed counts, with the
 fitted skew-normal probability density function for a particular gene/transcript.
 }
 \examples{
-   library(SIEVE)
+   library(SIEVEseq)
    data("clrCounts1")
    SN.plot(clrCounts1[1,])
    SN.plot(clrCounts1[2,])

@@ -26,11 +26,15 @@ violin.plot.SIEVE(
 
 \item{ylab}{Name of the y-axis.}
 }
+\value{
+A ggplot object displaying the distribution of CLR-transformed
+expression values for the specified gene across groups.
+}
 \description{
 Produce violin plots of CLR-transformed count data for two or three groups.
 }
 \examples{
-  library(SIEVE)
+  library(SIEVEseq)
   data(clrCounts2)  # first 50 genes (gene1 to gene50) are DV genes
   data(clrCounts3)  # first 50 genes (gene1 to gene50) are DE genes
   group0 <- c(rep(0, 200), rep(1, 200))
